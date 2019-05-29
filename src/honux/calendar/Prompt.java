@@ -5,38 +5,47 @@ import java.util.Scanner;
 public class Prompt {
 
 	private final static String PROMPT = "cal> ";
+
+	/**
+	 * 
+	 * @param week 요일명
+	 * @return 0~6 (0 = sunday, 6=saterday)
+	 */
+	
+	public int parseDay(String week){
+		if (week.equals("su"))return 0;
+		else if(week.equals("mo")) return 1;
+		else if(week.equals("tu")) return 2;
+		else if(week.equals("we")) return 3;
+		else if(week.equals("th")) return 4;
+		else if(week.equals("fr")) return 5;
+		else if(week.equals("sa")) return 6;
+		else 
+			return 0;
+	}
 	
 	public void runPrompt(){
 
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
 
-		int month = -1;
-		int year = -1;
+		int month = 1;
+		int year = 2017;
+		
 		while (true) {
-			System.out.println("연도를 입력하세요. ");
+			System.out.println("연도를 입력하세요. (exit: -1)");
 			System.out.print("YEAR> ");
 			year = scanner.nextInt();
+			if (year == -1) break;
+			
 			System.out.println("달을 입력하세요. ");
 			System.out.print("MONTH> ");
 			month = scanner.nextInt();
-			if (month == -1) {
-				break;
-			}
-			if (month > 12) {
+			
+			if (month > 12 || month < 1 ) {
+				System.out.println("잘못된 입력입니다.");
 				continue;
 			}
-//			System.out.println(" 일   월   화   수   목   금   토 ");
-//			System.out.println("--------------------");
-//			System.out.println(" 1  2  3  4  5  6  7");
-//			System.out.println(" 8  9 10 11 12 13 14");
-//			System.out.println("15 16 17 18 19 20 21");
-//			System.out.println("22 23 24 25 26 27 28");
-//			if (cal.MaxDaysofMonth(month) == 30) {
-//				System.out.println("29 30");
-//			} else if (cal.MaxDaysofMonth(month) == 31) {
-//				System.out.println("29 30 31");
-//			}
 			
 			cal.printCalendar(year, month);			
 		}
